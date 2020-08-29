@@ -27,13 +27,29 @@ export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
                     changed = true;
                 }
 
-                state[id] = { 
-                    ...state[id], 
-                    underlying: state[id].current 
+                state[id] = {
+                    ...state[id],
+                    underlying: state[id].current
                 }
             }
         }
     })
 
     return state;
+}
+
+
+export function underlying<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
+    if (!(id in state))
+        return state;
+
+    const entity = state[id];
+
+    if (before && entity.underlying !== before)
+        return state;
+
+    return {
+        ...state,
+        [id]: { ...entity, underlying }
+    };
 }
