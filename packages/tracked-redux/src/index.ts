@@ -1,14 +1,10 @@
-import { Tracked } from "./types"
-
-type Dictionary<T> = {
-    [id: number]: T
-}
+import { Tracked, Dictionary } from "./types"
 
 export function track<T>(entity: T): Tracked<T> {
     return { loaded: entity, underlying: entity, current: entity };
 }
 
-export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)): Dictionary<Tracked<T>> {
+export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
     const id = +entity[idField];
     return {
         ...state,
@@ -94,3 +90,6 @@ export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
     }
 
 }
+
+
+//TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, setCurrentAsLoaded, updateProperty, updateUnchangedProperties
