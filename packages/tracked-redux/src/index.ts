@@ -53,3 +53,19 @@ export function underlying<T>(state: Dictionary<Tracked<T>>, id: number, underly
         [id]: { ...entity, underlying }
     };
 }
+
+export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e: T) => T) {
+    if (!(id in state))
+        return state;
+
+    const entity = state[id];
+    const current = modify(entity.current);
+    
+    if (current === entity.current)
+        return state;
+
+    return {
+        ...state,
+        [id]: { ...entity, current }
+    }
+}
