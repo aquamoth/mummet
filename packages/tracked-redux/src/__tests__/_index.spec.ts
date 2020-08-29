@@ -1,5 +1,11 @@
-import {testMethod} from '..'
+import {makeTracked} from '..'
 
-test("succeeds", ()=>{
-    expect(testMethod()).toBe("Test")
+test("makeTracked", ()=>{
+    const entity = {};
+
+    const actual = makeTracked(entity)
+    
+    expect(actual.current).toBe(entity)
+    expect(actual.underlying).toBe(entity)
+    expect(actual.loaded).toBe(entity)
 })
