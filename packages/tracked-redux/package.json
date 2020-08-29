@@ -10,7 +10,9 @@
   "author": "Mattias Åslund (mattias@trustfall.se)",
   "license": "ISC",
   "devDependencies": {
+    "@types/deep-freeze": "^0.1.2",
     "@types/jest": "^26.0.10",
+    "deep-freeze": "0.0.1",
     "jest": "^26.4.2",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
@@ -18,6 +20,9 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testPathIgnorePatterns": ["<rootDir>/build/", "<rootDir>/node_modules/"]
+    "testPathIgnorePatterns": [
+      "<rootDir>/build/",
+      "<rootDir>/node_modules/"
+    ]
   }
 }
