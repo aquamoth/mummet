@@ -22,7 +22,7 @@ export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
     return state;
 }
 
-export function restore_underlying<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
+export function rollback<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
     if (!(id in state))
         return state;
 
