@@ -66,6 +66,9 @@ export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e:
     }
 }
 
+export function updateProperty<T>(state: Dictionary<Tracked<T>>, id: number, property: keyof (T), value: any) {
+    return update(state, id, e => ({ ...e, [property]: value }))
+}
 
 export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
     if (!(id in state))
@@ -73,19 +76,19 @@ export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
 
     const entity = state[id]
 
-    if(!entity.underlying) {
-        state = {...state}
+    if (!entity.underlying) {
+        state = { ...state }
         delete state[id]
         return state;
     }
-    else{
-        return { 
-            ...state, 
-            [id]: { 
-                ...entity, 
-                current: null, 
-                loaded: null 
-            } 
+    else {
+        return {
+            ...state,
+            [id]: {
+                ...entity,
+                current: null,
+                loaded: null
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 import deepFreeze from "deep-freeze"
-import { track, update } from '..'
+import { track, update, updateProperty } from '..'
 
 test("update modifies current values", () => {
     const state = deepFreeze({
@@ -8,9 +8,9 @@ test("update modifies current values", () => {
         [3]: track({ id: 3, value: 'original' }),
     })
     const entity = deepFreeze({ id: 2, value: 'changed' })
-    const expected = { ...state, [2]: {...state[2], current: entity} }
-    
-    const actual = update(state, 2, e => ({...e, value: entity.value }))
+    const expected = { ...state, [2]: { ...state[2], current: entity } }
+
+    const actual = update(state, 2, e => ({ ...e, value: entity.value }))
 
     expect(actual).toStrictEqual(expected)
 })
@@ -19,8 +19,8 @@ test("update doesn't add missing enities", () => {
     const state = deepFreeze({
         [1]: track({ id: 1, value: 'original' }),
     })
-    
-    const actual = update(state, 2, e => ({...e, value: 'IRRELEVANT' }))
+
+    const actual = update(state, 2, e => ({ ...e, value: 'IRRELEVANT' }))
 
     expect(actual).toBe(state)
 })
@@ -31,8 +31,22 @@ test("update doesn't change state if entity is not modified", () => {
         [2]: track({ id: 2, value: 'original' }),
         [3]: track({ id: 3, value: 'original' }),
     })
-    
+
     const actual = update(state, 2, e => e)
 
     expect(actual).toBe(state)
+})
+
+test("updateProperty updates by property name", () => {
+    const state = deepFreeze({
+        [1]: track({ id: 1, value: 'original' }),
+        [2]: track({ id: 2, value: 'original' }),
+        [3]: track({ id: 3, value: 'original' }),
+    })
+
+    const expected = update(state, 2, e => ({ ...e, value: 'next' }));
+
+    const actual = updateProperty(state, 2, 'value', 'next');
+
+    expect(actual).toStrictEqual(expected)
 })
