@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, setUnderlying, updateProperty } from '..'
+import { track } from '../helpers'
+import { setUnderlying, updateProperty } from '..'
 
 test("setUnderlying adds new entities as not loaded", () => {
     const state = deepFreeze({

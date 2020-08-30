@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, commit } from '..'
+import { track } from '../helpers'
+import { commit } from '..'
 
 test("commit copies current to underlying", () => {
     const baseState = deepFreeze({

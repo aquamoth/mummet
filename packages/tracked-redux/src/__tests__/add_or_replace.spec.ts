@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, addOrReplace } from '..'
+import { track } from '../helpers'
+import { addOrReplace } from '..'
 
 test("addOrReplace replaces existing entity", () => {
     const state = deepFreeze({
@@ -9,7 +10,7 @@ test("addOrReplace replaces existing entity", () => {
     })
     const entity = deepFreeze({ id: 2, value: 'changed' })
     const expected = { ...state, [2]: track(entity) }
-    
+
     const actual = addOrReplace(state, entity, 'id')
 
     expect(actual).toStrictEqual(expected)

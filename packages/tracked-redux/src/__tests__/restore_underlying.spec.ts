@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, restore_underlying } from '..'
+import { track } from '../helpers'
+import { restore_underlying } from '..'
 
 test("restore_underlying sets underlying value", () => {
     const baseState = deepFreeze({

@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, update, updateProperty } from '..'
+import { track } from '../helpers'
+import { update, updateProperty } from '..'
 
 test("update modifies current values", () => {
     const state = deepFreeze({

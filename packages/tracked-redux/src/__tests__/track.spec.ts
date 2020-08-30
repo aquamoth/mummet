@@ -1,5 +1,5 @@
 import deepFreeze from "deep-freeze"
-import { track } from '..'
+import { track } from '../helpers'
 
 test("track creates a Tracked<T>", () => {
     const entity = deepFreeze({ id: 4 });

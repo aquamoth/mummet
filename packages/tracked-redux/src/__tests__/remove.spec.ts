@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, remove } from '..'
+import { track } from '../helpers'
+import { remove } from '..'
 
 test("remove deletes current values", () => {
     const state = deepFreeze({

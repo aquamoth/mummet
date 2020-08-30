@@ -1,5 +1,6 @@
 import deepFreeze from "deep-freeze"
-import { track, updateProperty, refreshLoaded } from '..'
+import { track } from '../helpers'
+import { updateProperty, refreshLoaded } from '..'
 
 test("loaded sets the current state as loaded", () => {
     const baseState = deepFreeze({
