@@ -35,7 +35,7 @@ export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
 }
 
 
-export function underlying<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
+export function restore_underlying<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
     if (!(id in state))
         return state;
 
