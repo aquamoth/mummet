@@ -111,22 +111,56 @@ export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
     return changed ? newState : state;
 }
 
-// export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof(T)) {
-//     const newState = {
-//         ...state
-//     };
+export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof (T)) {
+    const newState = {
+        ...state
+    };
 
-//     for(const entity of entities){
-//         const id = +entity[idProp]
+    for (const entity of entities) {
+        const id = +entity[idProp]
 
-//         newState[id] = {
-//             current: entity,
-//             underlying: entity,
-//             loaded: null
-//         }
-//     }
+        newState[id] = {
+            current: updateUnchangedProperties(state[id], entity),
+            underlying: entity,
+            loaded: state[id]?.loaded || null
+        }
+    }
 
-//     return newState
-// }
+    return newState
+
+
+    function updateUnchangedProperties(before: Tracked<T>, newItem: T) {
+        if (!before)
+            return newItem;
+
+        const current = before.current
+        const underlying = before.underlying
+
+        if (current === null){
+            if(underlying === null){
+                return newItem;
+            }
+            else {
+                return null;
+            }
+        }
+        else if(underlying === null){
+            return current;
+        }
+        else{
+
+            const next = { ...current };
+
+            Object.keys(newItem)
+                .filter(property => current[property] === underlying[property])
+                .forEach(property => {
+                    next[property] = newItem[property]
+                })
+    
+            return next
+
+        }
+    }
+}
 
 //TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, updateUnchangedProperties
