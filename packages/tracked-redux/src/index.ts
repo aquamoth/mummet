@@ -136,31 +136,22 @@ export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], i
         const current = before.current
         const underlying = before.underlying
 
-        if (current === null){
-            if(underlying === null){
-                return newItem;
-            }
-            else {
-                return null;
-            }
-        }
-        else if(underlying === null){
+        if (current === null)
+            return underlying === null ? newItem : null;
+        
+        if (underlying === null)
             return current;
-        }
-        else{
 
-            const next = { ...current };
+        const next = { ...current };
 
-            Object.keys(newItem)
-                .filter(property => current[property] === underlying[property])
-                .forEach(property => {
-                    next[property] = newItem[property]
-                })
-    
-            return next
+        Object.keys(newItem)
+            .filter(property => current[property] === underlying[property])
+            .forEach(property => {
+                next[property] = newItem[property]
+            })
 
-        }
+        return next
     }
 }
 
-//TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, updateUnchangedProperties
+//TODO: findAll, findModified, filterModified, findDeleted
