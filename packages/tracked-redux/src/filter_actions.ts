@@ -14,3 +14,9 @@ export function findRemoved<T>(state: Dictionary<Tracked<T>>) {
         .filter(e => e.underlying !== null)
         .map(e => e.underlying)
 }
+
+export function find<T>(state: Dictionary<Tracked<T>>, callback: (e: Tracked<T>) => boolean) {
+    return Object.keys(state)
+        .map(id => state[+id])
+        .filter(callback)
+}
