@@ -91,8 +91,25 @@ export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
             }
         }
     }
-
 }
 
 
-//TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, setCurrentAsLoaded, updateProperty, updateUnchangedProperties
+export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
+    const newState = {};
+    let changed = false;
+
+    Object.keys(state).forEach(id => {
+        let entity = state[+id];
+
+        if (entity.current !== entity.loaded) {
+            entity = { ...entity, loaded: entity.current }
+            changed = true;
+        }
+
+        newState[+id] = entity
+    })
+
+    return changed ? newState : state;
+}
+
+//TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, updateUnchangedProperties
