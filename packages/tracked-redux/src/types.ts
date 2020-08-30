@@ -1,7 +1,7 @@
 export interface Tracked<T> {
-    current: T,
-    underlying: T,
-    loaded: T
+    current: T | null,
+    underlying: T | null,
+    loaded: T | null
 }
 
 export type Dictionary<V, K extends string | number = number> = {

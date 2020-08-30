@@ -50,7 +50,7 @@ export function restore_underlying<T>(state: Dictionary<Tracked<T>>, id: number,
     };
 }
 
-export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e: T) => T) {
+export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e: T | null) => T | null) {
     if (!(id in state))
         return state;
 
@@ -67,7 +67,7 @@ export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e:
 }
 
 export function updateProperty<T>(state: Dictionary<Tracked<T>>, id: number, property: keyof (T), value: any) {
-    return update(state, id, e => ({ ...e, [property]: value }))
+    return update(state, id, e => (e === null ? null : { ...e, [property]: value }))
 }
 
 export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
@@ -93,7 +93,6 @@ export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
     }
 }
 
-
 export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
     const newState = {};
     let changed = false;
@@ -111,5 +110,23 @@ export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
 
     return changed ? newState : state;
 }
+
+// export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof(T)) {
+//     const newState = {
+//         ...state
+//     };
+
+//     for(const entity of entities){
+//         const id = +entity[idProp]
+
+//         newState[id] = {
+//             current: entity,
+//             underlying: entity,
+//             loaded: null
+//         }
+//     }
+
+//     return newState
+// }
 
 //TODO: findAll, findModified, filterModified, findDeleted, addWithKeepChanges, updateUnchangedProperties

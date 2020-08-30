@@ -10,7 +10,7 @@ test("update modifies current values", () => {
     const entity = deepFreeze({ id: 2, value: 'changed' })
     const expected = { ...state, [2]: { ...state[2], current: entity } }
 
-    const actual = update(state, 2, e => ({ ...e, value: entity.value }))
+    const actual = update(state, 2, e => ({ id: 2, value: entity.value }))
 
     expect(actual).toStrictEqual(expected)
 })
@@ -20,7 +20,7 @@ test("update doesn't add missing enities", () => {
         [1]: track({ id: 1, value: 'original' }),
     })
 
-    const actual = update(state, 2, e => ({ ...e, value: 'IRRELEVANT' }))
+    const actual = update(state, 2, e => ({ id: 2, value: 'IRRELEVANT' }))
 
     expect(actual).toBe(state)
 })
@@ -44,7 +44,7 @@ test("updateProperty updates by property name", () => {
         [3]: track({ id: 3, value: 'original' }),
     })
 
-    const expected = update(state, 2, e => ({ ...e, value: 'next' }));
+    const expected = update(state, 2, e => ({ id: 2, value: 'next' }));
 
     const actual = updateProperty(state, 2, 'value', 'next');
 
