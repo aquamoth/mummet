@@ -2,9 +2,11 @@
   "name": "mummet-forms",
   "version": "0.1.0",
   "description": "React form controls that indicate if the data is edited or not",
-  "main": "index.ts",
+  "main": "build/index.js",
+  "module": "build/index.es.js",
+  "esnext:main": "build/index.es.js",
   "scripts": {
-    "build": "tsc",
+    "build": "rollup -c",
     "test": "jest"
   },
   "author": "Mattias Åslund (mattias@trustfall.se)",
@@ -20,6 +22,11 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-test-renderer": "^16.13.1",
+    "rollup": "^2.26.8",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.3",
+    "rollup-plugin-typescript2": "^0.27.2",
     "ts-jest": "^26.3.0",
     "typescript": "^4.0.2"
   },
@@ -35,5 +42,8 @@
       "<rootDir>/build/",
       "<rootDir>/node_modules/"
     ]
-  }
+  },
+  "files": [
+    "build"
+  ]
 }
