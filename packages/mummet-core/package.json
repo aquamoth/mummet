@@ -1,6 +1,6 @@
 {
-  "name": "tracked-redux",
-  "version": "0.2.0",
+  "name": "mummet-core",
+  "version": "0.3.0",
   "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
   "main": "index.ts",
   "scripts": {

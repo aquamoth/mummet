@@ -1,5 +1,5 @@
 {
-  "name": "tracked-forms",
+  "name": "mummet-forms",
   "version": "0.1.0",
   "description": "React form controls that indicate if the data is edited or not",
   "main": "index.ts",
