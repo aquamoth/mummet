@@ -1,7 +1,7 @@
 {
-  "name": "tracked-redux",
-  "version": "0.2.0",
-  "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
+  "name": "tracked-forms",
+  "version": "0.1.0",
+  "description": "React form controls that indicate if the data is edited or not",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
