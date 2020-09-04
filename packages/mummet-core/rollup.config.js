@@ -26,6 +26,7 @@ export default {
     resolve(),
     typescript({
       rollupCommonJSResolveHack: true,
+      tsconfig: 'tsconfig-rollup.json',
       exclude: "**/__tests__/**",
       clean: true
     }),

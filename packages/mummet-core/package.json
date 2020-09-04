@@ -2,9 +2,9 @@
   "name": "mummet-core",
   "version": "0.3.0",
   "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
-  "main": "build/index.js",
-  "module": "build/index.es.js",
-  "esnext:main": "build/index.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "esnext:main": "dist/index.es.js",
   "scripts": {
     "build": "rollup -c",
     "test": "jest"
@@ -29,11 +29,11 @@
     "collectCoverage": true,
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
-      "<rootDir>/build/",
+      "<rootDir>/dist/",
       "<rootDir>/node_modules/"
     ]
   },
   "files": [
-    "build"
+    "dist"
   ]
 }
