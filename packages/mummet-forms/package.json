@@ -31,7 +31,7 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "mummet-core": "file:../mummet-core"
+    "mummet-core": "^0.3.0"
   },
   "peerDependencies": {
     "react": "^16.0.0",

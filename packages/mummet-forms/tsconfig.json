@@ -17,7 +17,8 @@
       "suppressImplicitAnyIndexErrors": true,
       "noUnusedLocals": true,
       "noUnusedParameters": false,
-      "esModuleInterop": true //https://blogs.msdn.microsoft.com/typescript/2018/01/31/announcing-typescript-2-7/#easier-ecmascript-module-interoperability
+      "esModuleInterop": true, //https://blogs.msdn.microsoft.com/typescript/2018/01/31/announcing-typescript-2-7/#easier-ecmascript-module-interoperability
+      "typeRoots": [ "./node_modules"]
     },
     "include": ["src"],
     "exclude": ["node_modules", "build"]    
