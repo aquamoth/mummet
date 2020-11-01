@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { rollback } from '..'
+import { rollback } from '.'
 
 describe("save_actions", () => {
     describe("rollback", () => {

@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { remove, findRemoved } from '..'
+import { remove, findRemoved } from '.'
 
 describe("filter_actions", () => {
     describe("findRemoved", () => {

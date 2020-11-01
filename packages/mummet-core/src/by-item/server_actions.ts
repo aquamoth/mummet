@@ -1,5 +1,5 @@
-import { Tracked, Dictionary } from './types'
-import { track } from './helpers'
+import { Tracked, Dictionary } from '../types'
+import { track } from '../helpers'
 
 export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
     const id = +entity[idField];

@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { find } from '..'
+import { find } from '.'
 
 describe("filter_actions", () => {
     describe("find", () => {

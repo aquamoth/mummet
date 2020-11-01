@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { addOrReplace } from '..'
+import { addOrReplace } from '.'
 
 describe("server_actions", () => {
     describe("addOrReplace", () => {

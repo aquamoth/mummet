@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { remove } from '..'
+import { remove } from '.'
 
 describe("user_actions", () => {
     describe("remove", () => {

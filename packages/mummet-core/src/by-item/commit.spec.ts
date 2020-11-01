@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { commit } from '..'
+import { commit } from '.'
 
 describe("save_actions", () => {
     describe("commit", () => {

@@ -1,4 +1,4 @@
-import { Tracked, Dictionary } from './types'
+import { Tracked, Dictionary } from '../types'
 // import { track } from './helpers'
 
 export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e: T | null) => T | null) {

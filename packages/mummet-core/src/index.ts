@@ -1,5 +1,16 @@
-export { commit, rollback } from './save_actions'
-export { addOrReplace, setUnderlying } from './server_actions'
-export { update, updateProperty, remove, refreshLoaded } from './user_actions'
-export { findModified, findRemoved, find } from './filter_actions'
+///@deprecated import 'mummet-core/by-item' instead
+export {
+    commit, 
+    rollback, 
+    addOrReplace, 
+    setUnderlying, 
+    update, 
+    updateProperty, 
+    remove, 
+    refreshLoaded, 
+    findModified, 
+    findRemoved, 
+    find
+} from './by-item'
+
 export { track } from './helpers'

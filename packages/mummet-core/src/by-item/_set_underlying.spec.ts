@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { setUnderlying, updateProperty } from '..'
+import { setUnderlying, updateProperty } from '.'
 
 describe("server_actions", () => {
     describe("setUnderlying", () => {

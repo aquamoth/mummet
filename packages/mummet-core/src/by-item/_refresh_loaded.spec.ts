@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { updateProperty, refreshLoaded } from '..'
+import { updateProperty, refreshLoaded } from '.'
 
 describe("user_actions", () => {
     describe("refreshLoaded", () => {

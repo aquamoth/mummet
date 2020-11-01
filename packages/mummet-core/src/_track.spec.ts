@@ -1,5 +1,5 @@
 import deepFreeze from "deep-freeze"
-import { track } from '../helpers'
+import { track } from './helpers'
 
 describe("track", ()=>{
     test("creates a Tracked<T>", () => {

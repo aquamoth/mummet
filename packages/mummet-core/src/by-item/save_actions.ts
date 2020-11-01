@@ -1,4 +1,4 @@
-import { Tracked, Dictionary } from './types'
+import { Tracked, Dictionary } from '../types'
 
 export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
     let changed = false;

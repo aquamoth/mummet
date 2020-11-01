@@ -1,4 +1,4 @@
-import { Tracked, Dictionary } from './types'
+import { Tracked, Dictionary } from '../types'
 
 export function findModified<T>(state: Dictionary<Tracked<T>>) {
     return Object.keys(state)
