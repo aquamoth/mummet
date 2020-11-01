@@ -7,12 +7,12 @@ export function findModified<T>(state: Dictionary<Tracked<T>>) {
         .filter(e => e.current !== e.underlying)
 }
 
-export function findRemoved<T>(state: Dictionary<Tracked<T>>) {
+export function findRemoved<T>(state: Dictionary<Tracked<T>>): T[] {
     return Object.keys(state)
-        .map(id => state[+id])
+        .map(id => state[+id]!)
         .filter(e => e.current === null)
         .filter(e => e.underlying !== null)
-        .map(e => e.underlying)
+        .map(e => e.underlying!)
 }
 
 export function find<T>(state: Dictionary<Tracked<T>>, callback: (e: Tracked<T>) => boolean) {
