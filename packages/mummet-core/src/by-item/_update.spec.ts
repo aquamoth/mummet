@@ -18,7 +18,7 @@ describe("user_actions", () => {
             expect(actual).toStrictEqual(expected)
         })
 
-        test("doesn't add missing enities", () => {
+        test("doesn't add missing entities", () => {
             const state = deepFreeze({
                 [1]: track({ id: 1, value: 'original' }),
             })

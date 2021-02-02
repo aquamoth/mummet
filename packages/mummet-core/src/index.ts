@@ -2,6 +2,7 @@
 export {
     commit, 
     rollback, 
+    addOrUpdate,
     addOrReplace, 
     setUnderlying, 
     update, 

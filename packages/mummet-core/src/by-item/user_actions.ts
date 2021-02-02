@@ -1,5 +1,20 @@
 import { Tracked, Dictionary } from '../types'
-// import { track } from './helpers'
+
+export function addOrUpdate<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
+    const id = entity[idField] as any as number|string
+    if(id in state) {
+        return { 
+            ...state, 
+            [id]: { ...state[id], current: entity }
+        }
+    }
+    else {
+        return {
+            ...state,
+            [id]: { current: entity, loaded: null, underlying: null }
+        }
+    }
+}
 
 export function update<T>(state: Dictionary<Tracked<T>>, id: number|string, modify: (e: T | null) => T | null) {
     if (!(id in state))
