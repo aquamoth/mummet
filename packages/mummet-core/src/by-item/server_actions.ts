@@ -2,7 +2,7 @@ import { Tracked, Dictionary } from '../types'
 import { track } from '../helpers'
 
 export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
-    const id = +entity[idField];
+    const id = entity[idField] as any as number|string
     return {
         ...state,
         [id]: track(entity)
@@ -15,7 +15,7 @@ export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], i
     };
 
     for (const entity of entities) {
-        const id = +entity[idProp]
+        const id = entity[idProp] as any as number|string
 
         newState[id] = {
             current: updateUnchangedProperties(state[id], entity),

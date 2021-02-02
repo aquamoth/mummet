@@ -1,7 +1,7 @@
 import { Tracked, Dictionary } from '../types'
 // import { track } from './helpers'
 
-export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e: T | null) => T | null) {
+export function update<T>(state: Dictionary<Tracked<T>>, id: number|string, modify: (e: T | null) => T | null) {
     if (!(id in state))
         return state;
 
@@ -17,11 +17,11 @@ export function update<T>(state: Dictionary<Tracked<T>>, id: number, modify: (e:
     }
 }
 
-export function updateProperty<T>(state: Dictionary<Tracked<T>>, id: number, property: keyof (T), value: any) {
+export function updateProperty<T>(state: Dictionary<Tracked<T>>, id: number|string, property: keyof (T), value: any) {
     return update(state, id, e => (e === null ? null : { ...e, [property]: value }))
 }
 
-export function remove<T>(state: Dictionary<Tracked<T>>, id: number) {
+export function remove<T>(state: Dictionary<Tracked<T>>, id: number|string) {
     if (!(id in state))
         return state;
 
@@ -49,14 +49,14 @@ export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
     let changed = false;
 
     Object.keys(state).forEach(id => {
-        let entity = state[+id];
+        let entity = state[id];
 
         if (entity.current !== entity.loaded) {
             entity = { ...entity, loaded: entity.current }
             changed = true;
         }
 
-        newState[+id] = entity
+        newState[id] = entity
     })
 
     return changed ? newState : state;

@@ -32,5 +32,17 @@ describe("server_actions", () => {
 
             expect(actual).toStrictEqual(expected)
         })
+
+        test("supports string keys", () => {
+            const state = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+            })
+            const entity = deepFreeze({ id: 'two', value: 'changed' })
+            const expected = { ...state, ['two']: track(entity) }
+
+            const actual = addOrReplace(state, entity, 'id')
+
+            expect(actual).toStrictEqual(expected)
+        })
     })
 })

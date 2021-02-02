@@ -43,5 +43,17 @@ describe("user_actions", () => {
 
             expect(actual).toBe(state)
         })
+
+        test("supports string keys", () => {
+            const state = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+                ['two']: track({ id: 'two', value: 'original' }),
+            })
+            const expected = { ...state, ['two']: { ...state['two'], current: null, loaded: null } }
+
+            const actual = remove(state, 'two')
+
+            expect(actual).toStrictEqual(expected)
+        })
     })
 })

@@ -51,5 +51,22 @@ describe("save_actions", () => {
 
             expect(actual).toBe(state)
         })
+
+        test("supports string keys", () => {
+            const baseState = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+            })
+
+            const updatedEntity = { ...baseState['one'], underlying: { id: 'one', value: 'updated-2' } }
+
+            const state = deepFreeze({
+                ...baseState,
+                ['one']: updatedEntity,
+            })
+
+            const actual = rollback(state, 'one', baseState['one'].underlying)
+
+            expect(actual).toStrictEqual(baseState)
+        })
     })
 })

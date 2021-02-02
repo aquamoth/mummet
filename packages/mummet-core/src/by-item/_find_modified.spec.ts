@@ -31,5 +31,18 @@ describe("filter_actions", () => {
 
             expect(actual).toStrictEqual([])
         })
+
+        test("supports string keys", () => {
+            const baseState = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+                ['two']: track({ id: 'two', value: 'original' }),
+            })
+
+            const state = update(baseState, 'two', e => ({ id: 'two', value: 'edited_value' }))
+
+            const actual = findModified(state);
+
+            expect(actual).toStrictEqual([state['two']])
+        })
     })
 })

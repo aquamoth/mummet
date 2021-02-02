@@ -1,6 +1,6 @@
 {
   "name": "mummet-core",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

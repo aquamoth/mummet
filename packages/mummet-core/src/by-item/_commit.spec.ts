@@ -47,5 +47,25 @@ describe("save_actions", () => {
 
             expect(actual).toBe(state)
         })
+
+        test("supports string keys", () => {
+            const baseState = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+            })
+
+            const state = deepFreeze({
+                ...baseState,
+                ['one']: { ...baseState['one'], current: { ...baseState['one'].current, value: 'updated-2' } },
+            })
+
+            const expected = {
+                ...state,
+                ['one']: { current: state['one'].current, underlying: state['one'].current, loaded: state['one'].loaded }
+            }
+
+            const actual = commit(state, ['one'])
+
+            expect(actual).toStrictEqual(expected)
+        })
     })
 })

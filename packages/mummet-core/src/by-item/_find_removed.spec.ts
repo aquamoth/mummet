@@ -17,5 +17,18 @@ describe("filter_actions", () => {
 
             expect(actual).toStrictEqual([state[2].underlying])
         })
+ 
+        test("supports string keys", () => {
+            const baseState = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+                ['two']: track({ id: 'two', value: 'original' }),
+            })
+
+            const state = remove(baseState, 'two')
+
+            const actual = findRemoved(state);
+
+            expect(actual).toStrictEqual([state['two'].underlying])
+        })
     })
 })

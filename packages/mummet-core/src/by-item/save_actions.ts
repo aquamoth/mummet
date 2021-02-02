@@ -1,6 +1,6 @@
 import { Tracked, Dictionary } from '../types'
 
-export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
+export function commit<T>(state: Dictionary<Tracked<T>>, ids: (number|string)[]) {
     let changed = false;
 
     ids.forEach(id => {
@@ -22,7 +22,7 @@ export function commit<T>(state: Dictionary<Tracked<T>>, ids: number[]) {
     return state;
 }
 
-export function rollback<T>(state: Dictionary<Tracked<T>>, id: number, underlying: T, before?: T) {
+export function rollback<T>(state: Dictionary<Tracked<T>>, id: number|string, underlying: T, before?: T) {
     if (!(id in state))
         return state;
 

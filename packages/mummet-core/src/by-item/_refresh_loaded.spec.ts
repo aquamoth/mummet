@@ -45,5 +45,20 @@ describe("user_actions", () => {
 
             expect(actual).toBe(baseState)
         })
+
+        test("supports string keys", () => {
+            const baseState = deepFreeze({
+                ['one']: track({ id: 'one', value: 'original' }),
+                ['two']: track({ id: 'two', value: 'original' }),
+            })
+
+            const state = updateProperty(baseState, 'two', 'value', 'changed');
+
+            const expected = { ...state, ['two']: { ...state['two'], loaded: state['two'].current } }
+
+            const actual = refreshLoaded(state)
+
+            expect(actual).toStrictEqual(expected)
+        })
     })
 })

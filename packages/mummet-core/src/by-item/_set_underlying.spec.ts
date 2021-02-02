@@ -122,5 +122,27 @@ describe("server_actions", () => {
 
             expect(actual).toStrictEqual(expected)
         })
+
+        test("supports string keys", () => {
+            const addedEntity = { id: 'one', value: "IRRELEVANT", extra: "IRRELEVANT" };
+            const state = deepFreeze({
+                ['one']: { current: addedEntity, loaded: addedEntity, underlying: null }
+            })
+
+            const entity = { id: 'one', value: 'new-underlying-value', extra: 'new-underlying-extra' }
+
+            const expected = {
+                ['one']: {
+                    current: addedEntity,
+                    loaded: addedEntity,
+                    underlying: entity
+                },
+
+            }
+
+            const actual = setUnderlying(state, [entity], 'id')
+
+            expect(actual).toStrictEqual(expected)
+        })
     })
 })
