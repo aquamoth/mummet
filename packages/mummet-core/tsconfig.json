@@ -8,6 +8,7 @@
       "allowJs": false,
       "jsx": "react",
       "declaration": true,
+      "strict": true,
       "moduleResolution": "node",
       "forceConsistentCasingInFileNames": true,
       "noImplicitReturns": true,

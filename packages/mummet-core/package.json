@@ -12,6 +12,7 @@
   "author": "Mattias Åslund (mattias@trustfall.se)",
   "license": "ISC",
   "devDependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
     "@types/deep-freeze": "^0.1.2",
     "@types/jest": "^26.0.10",
     "deep-freeze": "0.0.1",
