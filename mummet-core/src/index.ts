@@ -1,4 +1,3 @@
-///@deprecated import 'mummet-core/by-item' instead
 export {
     commit, 
     rollback, 

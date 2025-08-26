@@ -11,11 +11,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    },
-    "./by-item": {
-      "types": "./dist/by-item/index.d.ts",
-      "import": "./dist/by-item/index.mjs",
-      "require": "./dist/by-item/index.js"
     }
   },
   "scripts": {

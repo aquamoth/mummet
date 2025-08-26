@@ -49,6 +49,23 @@ The test app can depend on either the released version from npm or the local wor
   - `npm -w test-app run build`
   - `node test-app/dist/index.js`
 
+## Usage (API)
+
+Import the public API directly from `mummet-core`. Internal folders like `by-item` are not exposed as subpath imports.
+
+Example:
+
+```ts
+import { track, addOrUpdate, commit, findModified } from 'mummet-core';
+
+type Entity = { id: number; value: string };
+
+const state0 = { 1: track<Entity>({ id: 1, value: 'a' }) };
+const s1 = addOrUpdate({ ...state0 }, { id: 2, value: 'b' }, 'id');
+const s2 = commit({ ...s1 }, [1, 2]);
+const modified = findModified(s2 as any);
+```
+
 ## Publishing `mummet-core` to npm
 
 Publishing is done from the library workspace. The `prepare` script ensures `dist/` is built during publish.
@@ -94,8 +111,9 @@ Publishing is done from the library workspace. The `prepare` script ensures `dis
 
 ## Notes on Module/Type Resolution
 
-- The library exposes dual ESM/CJS builds via `exports`:
-  - `"."` and `"./by-item"` map to `dist/index.es.js` (import), `dist/index.js` (require), and proper `*.d.ts`
+- The library exposes dual ESM/CJS builds via `exports` (root only):
+  - `"."` maps to `dist/index.mjs` (import), `dist/index.js` (require), and `dist/index.d.ts`
+- The `by-item` folder is internal and not exposed as a subpath export; import only from `mummet-core`.
 - The test app uses `"module": "NodeNext"` and `"moduleResolution": "NodeNext"` in `tsconfig.json` to align with modern Node + `exports`.
 
 Happy hacking!
