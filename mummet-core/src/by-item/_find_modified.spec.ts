@@ -4,6 +4,22 @@ import { update, remove, findModified } from '.'
 
 describe("filter_actions", () => {
     describe("findModified", () => {
+
+        test("identifies an item that changed back and forth as unchanged", () =>{
+            const baseState = deepFreeze({
+                [1]: track({ id: 1, value: 'original' }),
+                [2]: track({ id: 2, value: 'original' }),
+                [3]: track({ id: 3, value: 'original' }),
+            })
+
+            const stateMiddle = update(baseState, 2, _e => ({ id: 2, value: 'edited_value' }))
+            const state = update(stateMiddle, 2, _e => ({ id: 2, value: 'original' }))
+
+            const actual = findModified(state);
+
+            expect(actual).toStrictEqual([])
+        })
+
         test("returns entities where current != underlying", () => {
             const baseState = deepFreeze({
                 [1]: track({ id: 1, value: 'original' }),

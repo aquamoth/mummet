@@ -21,10 +21,19 @@ export function update<T>(state: Dictionary<Tracked<T>, number|string>, id: numb
         return state;
 
     const entity = state[id];
-    const current = modify(entity.current);
+    let current = modify(entity.current);
 
     if (current === entity.current)
         return state;
+
+    if(entity.underlying != null){
+        const isUnchanged = Object.keys(current as object).every(
+            property => (current as any)[property] === (entity.underlying as any)[property]
+        )
+        if(isUnchanged){
+            current = entity.underlying;
+        }
+    }
 
     return {
         ...state,
