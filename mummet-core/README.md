@@ -47,7 +47,7 @@ state = addOrReplace(state, entity5, 'id')
 #### ... or semi-manually
 ```
 const entity6: MyEntity = { id: 6, name: 'entity 6' }
-state = { ...state, [entity6.id]: tracked(entity) }
+state = { ...state, [entity6.id]: track(entity6) }
 ```
 
 
@@ -95,16 +95,37 @@ Removed objects are excavated from the dictionary at this point.
 state = commit(state, [5, 6])
 ```
 
-### Restore one or more modified or deleted object
-Assigns the underlying value to the current.
-Newly created objects are excavated from the dictionary at this point.
+### Restore an entity's underlying state
+Assigns a provided underlying value to an entity without affecting its `current` value. Optionally guard with a `previous` value.
 ```
-state = rollback(state, [5, 6])
+// signature: rollback(state, id, underlying, previous?)
+state = rollback(state, 5, { id: 5, name: 'original from server' })
 ```
 
 ### Filter the dictionary based on tracked properties
 ```
-const trackedList = find(state, e => e.current?.name === 'entity 5' || e.underlying.name === 'entity 6')
+const trackedList = find(state, e => e.current?.name === 'entity 5' || e.underlying?.name === 'entity 6')
+
+## Development
+
+This package is part of a workspace. From the repository root:
+
+- Install deps: `npm install`
+- Build: `npm -w mummet-core run build`
+- Tests: `npm -w mummet-core test`
+- Watch tests: `npm -w mummet-core run test:watch`
+- Coverage: `npm -w mummet-core run test:cov`
+- Typecheck: `npm -w mummet-core run typecheck`
+- Lint: `npm -w mummet-core run lint`
+
+### Publish to npm
+
+Publishing is done from the library workspace. Ensure a clean build and passing tests, then:
+
+1) Bump version in `mummet-core/package.json` (e.g., `npm --workspace mummet-core version patch`)
+2) Authenticate: `npm login`
+3) Publish: `npm -w mummet-core publish --access public`
+4) Verify from a consumer app by installing the published version
 ```
 
 

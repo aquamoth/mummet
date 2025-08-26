@@ -33,6 +33,9 @@ Notes:
 ## Test (Library)
 
 - Run unit tests: `npm -w mummet-core test`
+- Watch mode: `npm -w mummet-core run test:watch`
+- Coverage: `npm -w mummet-core run test:cov`
+- Typecheck only: `npm -w mummet-core run typecheck`
 - Lint code: `npm -w mummet-core run lint`
 
 ## Try It in `test-app`
