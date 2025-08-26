@@ -17,6 +17,9 @@
     "build": "tsup",
     "prepare": "npm run build",
     "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix"
   },
@@ -32,8 +35,8 @@
     "eslint": "^9.34.0",
     "globals": "^16.3.0",
     "jest": "^30.0.5",
+    "@swc/jest": "^0.2.36",
     "tsup": "^8.3.5",
-    "ts-jest": "^29.4.1",
     "typescript": "^5.9.2"
   },
   "peerDependencies": {
@@ -41,14 +44,10 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.(ts|tsx)$": [
-        "ts-jest",
-        {
-          "tsconfig": "tsconfig.json"
-        }
-      ]
+      "^.+\\.(ts|tsx)$": ["@swc/jest"]
     },
-    "collectCoverage": true,
+    "cacheDirectory": "<rootDir>/.cache/jest",
+    "collectCoverage": false,
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
       "<rootDir>/dist/",
