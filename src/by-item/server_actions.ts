@@ -1,7 +1,7 @@
 import { Tracked, Dictionary } from '../types'
 import { track } from '../helpers'
 
-export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
+export function addOrReplace<T extends object>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof T) {
     const id = entity[idField] as any as number|string
     return {
         ...state,
@@ -9,7 +9,7 @@ export function addOrReplace<T>(state: Dictionary<Tracked<T>>, entity: T, idFiel
     }
 }
 
-export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof (T)) {
+export function setUnderlying<T extends object>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof T) {
     const newState = {
         ...state
     };
@@ -27,27 +27,27 @@ export function setUnderlying<T>(state: Dictionary<Tracked<T>>, entities: T[], i
     return newState
 
 
-    function updateUnchangedProperties(before: Tracked<T>, newItem: T) {
+    function updateUnchangedProperties(before: Tracked<T> | undefined, newItem: T): T | null {
         if (!before)
             return newItem;
 
-        const current = before.current
-        const underlying = before.underlying
+        const current = before.current;
+        const underlying = before.underlying;
 
-        if (current === null)
-            return underlying === null ? newItem : null;
+        if (current == null) // null or undefined
+            return underlying == null ? newItem : null;
 
-        if (underlying === null)
+        if (underlying == null)
             return current;
 
-        const next = { ...current };
+        const next: T = { ...(current as T) };
 
-        Object.keys(newItem)
-            .filter(property => current[property] === underlying[property])
-            .forEach(property => {
-                next[property] = newItem[property]
-            })
+        Object.keys(newItem as object)
+            .filter((property) => (current as any)[property] === (underlying as any)[property])
+            .forEach((property) => {
+                (next as any)[property] = (newItem as any)[property];
+            });
 
-        return next
+        return next;
     }
 }
