@@ -13,7 +13,7 @@ describe("user_actions", () => {
             const entity = deepFreeze({ id: 2, value: 'changed' })
             const expected = { ...state, [2]: { ...state[2], current: entity } }
 
-            const actual = update(state, 2, e => ({ id: 2, value: entity.value }))
+            const actual = update(state, 2, _e => ({ id: 2, value: entity.value }))
 
             expect(actual).toStrictEqual(expected)
         })
@@ -23,7 +23,7 @@ describe("user_actions", () => {
                 [1]: track({ id: 1, value: 'original' }),
             })
 
-            const actual = update(state, 2, e => ({ id: 2, value: 'IRRELEVANT' }))
+            const actual = update(state, 2, _e => ({ id: 2, value: 'IRRELEVANT' }))
 
             expect(actual).toBe(state)
         })
@@ -35,7 +35,7 @@ describe("user_actions", () => {
                 [3]: track({ id: 3, value: 'original' }),
             })
 
-            const actual = update(state, 2, e => e)
+            const actual = update(state, 2, _e => _e)
 
             expect(actual).toBe(state)
         })
@@ -47,7 +47,7 @@ describe("user_actions", () => {
             const entity = deepFreeze({ id: 'one', value: 'changed' })
             const expected = { ...state, ['one']: { ...state['one'], current: entity } }
 
-            const actual = update(state, 'one', e => ({ id: 'one', value: entity.value }))
+            const actual = update(state, 'one', _e => ({ id: 'one', value: entity.value }))
 
             expect(actual).toStrictEqual(expected)
         })
@@ -61,7 +61,7 @@ describe("user_actions", () => {
                 [3]: track({ id: 3, value: 'original' }),
             })
 
-            const expected = update(state, 2, e => ({ id: 2, value: 'next' }));
+            const expected = update(state, 2, _e => ({ id: 2, value: 'next' }));
 
             const actual = updateProperty(state, 2, 'value', 'next');
 
@@ -74,7 +74,7 @@ describe("user_actions", () => {
                 ['two']: track({ id: 'two', value: 'original' }),
             })
 
-            const expected = update(state, 'two', e => ({ id: 'two', value: 'next' }));
+            const expected = update(state, 'two', _e => ({ id: 'two', value: 'next' }));
 
             const actual = updateProperty(state, 'two', 'value', 'next');
 

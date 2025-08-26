@@ -11,7 +11,7 @@ describe("filter_actions", () => {
                 [3]: track({ id: 3, value: 'original' }),
             })
 
-            const state = update(baseState, 2, e => ({ id: 2, value: 'edited_value' }))
+            const state = update(baseState, 2, _e => ({ id: 2, value: 'edited_value' }))
 
             const actual = findModified(state);
 
@@ -38,7 +38,7 @@ describe("filter_actions", () => {
                 ['two']: track({ id: 'two', value: 'original' }),
             })
 
-            const state = update(baseState, 'two', e => ({ id: 'two', value: 'edited_value' }))
+            const state = update(baseState, 'two', _e => ({ id: 'two', value: 'edited_value' }))
 
             const actual = findModified(state);
 

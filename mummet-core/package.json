@@ -3,23 +3,23 @@
   "version": "1.0.1",
   "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "esnext:main": "dist/index.es.js",
+  "module": "dist/index.mjs",
+  "esnext:main": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./by-item": {
       "types": "./dist/by-item/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.js"
+      "import": "./dist/by-item/index.mjs",
+      "require": "./dist/by-item/index.js"
     }
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "tsup",
     "prepare": "npm run build",
     "test": "jest",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
@@ -37,11 +37,7 @@
     "eslint": "^9.34.0",
     "globals": "^16.3.0",
     "jest": "^30.0.5",
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "rollup": "^4.48.1",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript2": "^0.36.0",
+    "tsup": "^8.3.5",
     "ts-jest": "^29.4.1",
     "typescript": "^5.9.2"
   },
