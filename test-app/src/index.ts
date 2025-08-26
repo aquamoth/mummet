@@ -1,5 +1,4 @@
-import { track } from 'mummet-core';
-import { addOrUpdate, commit, findModified } from 'mummet-core/by-item';
+import { track, addOrUpdate, commit, findModified } from 'mummet-core';
 
 type Entity = { id: number; value: string };
 
