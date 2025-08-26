@@ -29,7 +29,9 @@
     "tslib": "^2.0.1"
   },
   "jest": {
-    "preset": "ts-jest",
+    "transform": {
+      "^.+\\.(ts|tsx)$": ["ts-jest", { "tsconfig": "tsconfig.json" }]
+    },
     "collectCoverage": true,
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
