@@ -1,5 +1,9 @@
-build/
-dist/
 node_modules
+dist
 coverage
-__snapshots__
+.DS_Store
+.env*
+npm-debug.log*
+yarn-error.log
+*.log
+.cache/

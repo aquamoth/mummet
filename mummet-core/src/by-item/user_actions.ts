@@ -1,6 +1,6 @@
 import { Tracked, Dictionary } from '../types'
 
-export function addOrUpdate<T>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof (T)) {
+export function addOrUpdate<T>(state: Dictionary<Tracked<T>, number|string>, entity: T, idField: keyof T) {
     const id = entity[idField] as any as number|string
     if(id in state) {
         return { 
@@ -16,15 +16,24 @@ export function addOrUpdate<T>(state: Dictionary<Tracked<T>>, entity: T, idField
     }
 }
 
-export function update<T>(state: Dictionary<Tracked<T>>, id: number|string, modify: (e: T | null) => T | null) {
+export function update<T>(state: Dictionary<Tracked<T>, number|string>, id: number|string, modify: (e: T | null) => T | null) {
     if (!(id in state))
         return state;
 
     const entity = state[id];
-    const current = modify(entity.current);
+    let current = modify(entity.current);
 
     if (current === entity.current)
         return state;
+
+    if(entity.underlying != null){
+        const isUnchanged = Object.keys(current as object).every(
+            property => (current as any)[property] === (entity.underlying as any)[property]
+        )
+        if(isUnchanged){
+            current = entity.underlying;
+        }
+    }
 
     return {
         ...state,
@@ -32,11 +41,11 @@ export function update<T>(state: Dictionary<Tracked<T>>, id: number|string, modi
     }
 }
 
-export function updateProperty<T>(state: Dictionary<Tracked<T>>, id: number|string, property: keyof (T), value: any) {
+export function updateProperty<T>(state: Dictionary<Tracked<T>, number|string>, id: number|string, property: keyof T, value: any) {
     return update(state, id, e => (e === null ? null : { ...e, [property]: value }))
 }
 
-export function remove<T>(state: Dictionary<Tracked<T>>, id: number|string) {
+export function remove<T>(state: Dictionary<Tracked<T>, number|string>, id: number|string) {
     if (!(id in state))
         return state;
 
@@ -59,8 +68,8 @@ export function remove<T>(state: Dictionary<Tracked<T>>, id: number|string) {
     }
 }
 
-export function refreshLoaded<T>(state: Dictionary<Tracked<T>>) {
-    const newState = {};
+export function refreshLoaded<T>(state: Dictionary<Tracked<T>, number|string>) {
+    const newState = {} as Dictionary<Tracked<T>, number|string>;
     let changed = false;
 
     Object.keys(state).forEach(id => {

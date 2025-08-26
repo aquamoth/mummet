@@ -1,7 +1,8 @@
 {
-  "name": "root",
+  "name": "mummet-workspace",
   "private": true,
-  "devDependencies": {
-    "lerna": "^3.22.1"
-  }
+  "workspaces": [
+    "mummet-core",
+    "test-app"
+  ]
 }

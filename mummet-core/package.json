@@ -1,0 +1,60 @@
+{
+  "name": "mummet-core",
+  "version": "1.1.0",
+  "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "esnext:main": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "prepare": "npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix"
+  },
+  "author": "Mattias Åslund (mattias@trustfall.se)",
+  "license": "ISC",
+  "devDependencies": {
+    "@reduxjs/toolkit": "^1.6.2",
+    "@types/deep-freeze": "^0.1.5",
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "deep-freeze": "0.0.1",
+    "eslint": "^9.34.0",
+    "globals": "^16.3.0",
+    "jest": "^30.0.5",
+    "@swc/jest": "^0.2.36",
+    "tsup": "^8.3.5",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "tslib": "^2.0.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": ["@swc/jest"]
+    },
+    "cacheDirectory": "<rootDir>/.cache/jest",
+    "collectCoverage": false,
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist/",
+      "<rootDir>/node_modules/"
+    ]
+  },
+  "files": [
+    "dist"
+  ]
+}
