@@ -1,13 +1,13 @@
 import { Tracked, Dictionary } from '../types'
 
-export function findModified<T>(state: Dictionary<Tracked<T>>) {
+export function findModified<T>(state: Dictionary<Tracked<T>, number|string>) {
     return Object.keys(state)
         .map(id => state[id] as Tracked<T>)
         .filter(e => e.current !== null)
         .filter(e => e.current !== e.underlying)
 }
 
-export function findRemoved<T>(state: Dictionary<Tracked<T>>) {
+export function findRemoved<T>(state: Dictionary<Tracked<T>, number|string>) {
     return Object.keys(state)
         .map(id => state[id] as Tracked<T>)
         .filter(e => e.current === null)
@@ -15,7 +15,7 @@ export function findRemoved<T>(state: Dictionary<Tracked<T>>) {
         .map(e => e.underlying!)
 }
 
-export function find<T>(state: Dictionary<Tracked<T>>, callback: (e: Tracked<T>) => boolean) {
+export function find<T>(state: Dictionary<Tracked<T>, number|string>, callback: (e: Tracked<T>) => boolean) {
     return Object.keys(state)
         .map(id => state[id])
         .filter(callback)

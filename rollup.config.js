@@ -1,50 +1,35 @@
 import typescript from "rollup-plugin-typescript2";
-import commonjs from "rollup-plugin-commonjs";
+import commonjs from "@rollup/plugin-commonjs";
 import external from "rollup-plugin-peer-deps-external";
-import resolve from "rollup-plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 
-import pkg from "./package.json";
+// Avoid JSON imports in config for Rollup v4/Node loaders
 
 export default {
   input: "src/index.ts",
   output: [
     {
-      file: pkg.main,
+      file: "dist/index.js",
       format: "cjs",
       exports: "named",
       sourcemap: true
     },
     {
-      file: pkg.module,
+      file: "dist/index.es.js",
       format: "es",
       exports: "named",
       sourcemap: true
     }
   ],
-  external: [ 
-    ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {}),
-  ],
+  external: ["tslib"],
   plugins: [
     external(),
     resolve(),
     typescript({
-      rollupCommonJSResolveHack: true,
       tsconfig: 'tsconfig-rollup.json',
-      exclude: "**/__tests__/**",
+      exclude: ["**/__tests__/**"],
       clean: true
     }),
-    commonjs({
-      include: ["node_modules/**"],
-      namedExports: {
-        "node_modules/react/react.js": [
-          "Children",
-          "Component",
-          "PropTypes",
-          "createElement"
-        ],
-        "node_modules/react-dom/index.js": ["render"]
-      }
-    })
+    commonjs()
   ]
 };

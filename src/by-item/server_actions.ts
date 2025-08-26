@@ -1,7 +1,7 @@
 import { Tracked, Dictionary } from '../types'
 import { track } from '../helpers'
 
-export function addOrReplace<T extends object>(state: Dictionary<Tracked<T>>, entity: T, idField: keyof T) {
+export function addOrReplace<T extends object>(state: Dictionary<Tracked<T>, number|string>, entity: T, idField: keyof T) {
     const id = entity[idField] as any as number|string
     return {
         ...state,
@@ -9,7 +9,7 @@ export function addOrReplace<T extends object>(state: Dictionary<Tracked<T>>, en
     }
 }
 
-export function setUnderlying<T extends object>(state: Dictionary<Tracked<T>>, entities: T[], idProp: keyof T) {
+export function setUnderlying<T extends object>(state: Dictionary<Tracked<T>, number|string>, entities: T[], idProp: keyof T) {
     const newState = {
         ...state
     };
