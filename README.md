@@ -28,7 +28,7 @@ This installs dependencies for both `mummet-core` and `test-app`.
 
 Notes:
 - `mummet-core` has a `prepare` script that builds automatically on local install and on publish.
-- Rollup emits CommonJS (`dist/index.js`) and ES Module (`dist/index.es.js`) outputs plus `.d.ts` types.
+- tsup emits CommonJS (`dist/index.js`) and ES Module (`dist/index.mjs`) outputs plus `.d.ts` types.
 
 ## Test (Library)
 
@@ -106,8 +106,6 @@ Publishing is done from the library workspace. The `prepare` script ensures `dis
 - TypeScript cannot find declarations for `mummet-core`:
   - Ensure `mummet-core/dist/*.d.ts` are present (they’re generated on build)
   - `mummet-core/package.json` has `"types"` and `"exports"` entries that expose types
-- Rollup config warning about ESM:
-  - Harmless; to silence it, either add `"type": "module"` to `mummet-core/package.json` or rename `rollup.config.js` to `rollup.config.mjs`
 
 ## Notes on Module/Type Resolution
 
