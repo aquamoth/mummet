@@ -7,7 +7,9 @@
   "esnext:main": "dist/index.es.js",
   "scripts": {
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix"
   },
   "author": "Mattias Åslund (mattias@trustfall.se)",
   "license": "ISC",
@@ -15,7 +17,11 @@
     "@reduxjs/toolkit": "^1.6.2",
     "@types/deep-freeze": "^0.1.5",
     "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
     "deep-freeze": "0.0.1",
+    "eslint": "^9.34.0",
+    "globals": "^16.3.0",
     "jest": "^30.0.5",
     "rollup": "^2.26.8",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -30,7 +36,12 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.(ts|tsx)$": ["ts-jest", { "tsconfig": "tsconfig.json" }]
+      "^.+\\.(ts|tsx)$": [
+        "ts-jest",
+        {
+          "tsconfig": "tsconfig.json"
+        }
+      ]
     },
     "collectCoverage": true,
     "testEnvironment": "node",
