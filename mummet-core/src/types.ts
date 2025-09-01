@@ -4,6 +4,8 @@ export interface Tracked<T> {
     loaded: T | null
 }
 
-export type Dictionary<V, K extends string | number = number> = {
+export type DictionaryKey = string | number
+
+export type Dictionary<V, K extends DictionaryKey = number> = {
     [id in K]: V
 }

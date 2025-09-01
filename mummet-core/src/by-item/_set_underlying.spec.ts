@@ -1,6 +1,6 @@
 import deepFreeze from "deep-freeze"
 import { track } from '../helpers'
-import { setUnderlying, updateProperty } from '.'
+import { findModified, setUnderlying, updateProperty } from '.'
 
 describe("server_actions", () => {
     describe("setUnderlying", () => {
@@ -123,6 +123,24 @@ describe("server_actions", () => {
             expect(actual).toStrictEqual(expected)
         })
 
+        test("restores underlying if current properties are the same", () => {
+            const originalState = deepFreeze({
+                [1]: track({ id: 1, value: 'original' }),
+                [2]: track({ id: 2, value: 'original' }),
+                [3]: track({ id: 3, value: 'original' }),
+            })
+
+            const actualState = setUnderlying(originalState, [{ id: 2, value: 'next' }], "id");
+
+            // const actualState = updateProperty(actualState, 2, 'value', 'original');
+
+            // Object.keys(originalState).forEach(key =>{
+            //     expect(originalState[key].current).toStrictEqual(actualState[key].current)
+            // })
+            expect(findModified(actualState).length).toBe(0)
+            expect(actualState[2].current?.value).toBe("next")
+        })
+
         test("supports string keys", () => {
             const addedEntity = { id: 'one', value: "IRRELEVANT", extra: "IRRELEVANT" };
             const state = deepFreeze({
@@ -144,5 +162,8 @@ describe("server_actions", () => {
 
             expect(actual).toStrictEqual(expected)
         })
+
+
+        //TODO: Test
     })
 })

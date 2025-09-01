@@ -7,11 +7,26 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Jest tests3",
-            "program": "${workspaceRoot}/packages/tracked-redux/node_modules/jest/bin/jest",
+            "name": "Jest: Debug all (mummet-core)",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "cwd": "${workspaceFolder}/mummet-core",
             "runtimeArgs": ["--inspect-brk"],
+            "args": ["--runInBand", "--watchAll=false"],
             "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen"
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Jest: Debug current file (mummet-core)",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest.js",
+            "cwd": "${workspaceFolder}/mummet-core",
+            "runtimeArgs": ["--inspect-brk"],
+            "args": ["--runInBand", "--watchAll=false", "${relativeFile}"],
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "skipFiles": ["<node_internals>/**", "**/node_modules/**"]
         }
     ]
 }
