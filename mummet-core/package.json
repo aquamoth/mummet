@@ -1,6 +1,6 @@
 {
   "name": "mummet-core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Helper types and methods to track reducer changes and support undo, redo and auditing",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -44,7 +44,9 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.(ts|tsx)$": ["@swc/jest"]
+      "^.+\\.(ts|tsx)$": [
+        "@swc/jest"
+      ]
     },
     "cacheDirectory": "<rootDir>/.cache/jest",
     "collectCoverage": false,
